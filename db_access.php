@@ -2,7 +2,7 @@
 function OpenConnection() {
 	$connectionInfo = array (
 			"UID" => "HftAdmin@hft-projects",
-			"pwd" => "",
+			"pwd" => "database2016#",
 			"Database" => "EnglishTraining",
 			"LoginTimeout" => 30,
 			"Encrypt" => 1,
@@ -21,6 +21,7 @@ function OpenConnection() {
 	return $conn;
 }
 
+//todo: stored procedure approach (wie?) und wiederverwendbar machen
 function ReadData() {
 	try {
 		$conn = OpenConnection ();
