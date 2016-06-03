@@ -1,12 +1,10 @@
 <?php
-include 'db_access.php';
+include 'questions.php';
 
 echo "<html>";
-
-echo "Under construction.";
-phpinfo ();
-ReadData ();
-
+GetQuestions ();
+echo "<br/><br/><br/><br/><br/><br/><br/>";
+phpinfo();
 echo "</html>";
 
 
