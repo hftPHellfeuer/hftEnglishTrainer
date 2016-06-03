@@ -1,4 +1,7 @@
-<html>
-This site is under Construction</br>
-Be patient.
-</html>
+<?php
+echo "<html>";
+
+echo "Under construction.";
+
+echo "</html>"
+?>
