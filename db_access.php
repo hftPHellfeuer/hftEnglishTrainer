@@ -20,7 +20,6 @@ function OpenConnection() {
 	
 	return $conn;
 }
-
 function CloseConnection($conn) {
 	sqlsrv_close ( $conn );
 }
