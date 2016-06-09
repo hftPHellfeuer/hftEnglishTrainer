@@ -31,11 +31,11 @@ $result = "Not correct.";
 			</div>
 			<input type="hidden" name="nextQuestion" value="nextQuestion"
 				class="form-control"> <input type="hidden" name="i"
-				value=" <?php $i ?>">
+				value="<?php echo $i?>">
 
 			<div class="form-group ">
 				<input type="submit" value="Next question"
-					class="btn btn-success btn-lg"><br />
+					class="btn btn-success btn-lg">
 			</div>
 		</form>
 

@@ -42,13 +42,12 @@ if ($_GET ['i'] == count ( $questions )) {
 					<div class="form-group "><input type="submit" value="Submit" class="btn btn-success btn-lg"></div>
 			</form>
 	'; 
-	echo 'Debug: Id: ' . $question ['Id'] . ' Answer: ' . $question	['Answer'] . '	<br />	<br />';
+	
 }
 ?>
 </div>
 <?php
-echo 'DEBUG <br/> QuestionId: ' . $_GET ['questionId'] . '<br/>';
-echo 'Answer: ' . $_GET ['studentAnswer'] . '<br/>';
+echo 'Debug: Id: ' . $question ['Id'] . ' Answer: ' . $question	['Answer'] . '	<br />	<br />';
 ?>
 </body>
 </html>
