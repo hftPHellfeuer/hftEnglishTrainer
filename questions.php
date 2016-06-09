@@ -58,12 +58,13 @@ function getQuestionsForChapter($chapterId, $studentId)
 			$count ++;
 			
 		}
-		return $questions;
 	}
 
     /*Free the statement and connection resources. */
     sqlsrv_free_stmt( $stmt);
     sqlsrv_close( $conn);
+    
+    return $questions;
 
 }
 
@@ -99,6 +100,8 @@ function answerQuestion($questionId, $answer, $studentId)
 	/*Free the statement and connection resources. */
 	sqlsrv_free_stmt( $stmt3);
 	sqlsrv_close( $conn);
+	
+	return $result;
 
 }
 
