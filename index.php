@@ -12,13 +12,12 @@
 <br />
 <br />
 
-<?php
-include 'questions.php';
-
-// AnswerQuestion(8, 'PhP',2);
-
-getQuestionsForChapter ( 1, 2 );
-//GetQuestions ();
+<?php 
+echo '	<form name="form" action="question_show.php" method="get">
+			Please enter the chapter: <input type="text" name="Chapter" value="1"><br/>
+			<input type="hidden" name="i" value="0"><br/>
+			<input type="submit" value="Start the Quiz!"><br/>
+		</form>';
 
 ?>
 </html>

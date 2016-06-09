@@ -1,5 +1,6 @@
 <?php
 include 'db_access.php';
+
 function GetQuestions() {
 	try {
 		$sql = "SELECT * FROM Question";
@@ -28,8 +29,6 @@ function GetQuestions() {
 }
 
 //https://msdn.microsoft.com/en-us/library/cc626303(v=sql.105).aspx
-//TODO
-
 function getQuestionsForChapter($chapterId, $studentId)
 {
 
@@ -44,28 +43,32 @@ function getQuestionsForChapter($chapterId, $studentId)
     $conn = OpenConnection ();
 		/* Execute the query. */
 	$stmt = sqlsrv_query ( $conn, $sql, $params );
+	
+	$questions = array();
+	
 	if ($stmt == false) {
 		echo "Could not load Questions.\n";
 		die ( print_r ( sqlsrv_errors (), true ) );
 	} else {
 		$count = 0;
-		echo "Questions:<br/>";
 		while ( $row = sqlsrv_fetch_array ( $stmt, SQLSRV_FETCH_ASSOC ) ) {
-			echo ($row ['Text'] . " -> " . $row ['Answer']);
-			echo ("<br/>");
+			//echo ($row ['Text'] . " -> " . $row ['Answer']);
+			//echo ("<br/>");
+			array_push($questions, array('Id' => $row['Id'], 'Text' => $row ['Text'], 'Answer' => $row ['Answer']));
 			$count ++;
+			
 		}
 	}
-
-
 
     /*Free the statement and connection resources. */
     sqlsrv_free_stmt( $stmt);
     sqlsrv_close( $conn);
+    
+    return $questions;
 
 }
 
-function AnswerQuestion($questionId, $answer,$studentId)
+function answerQuestion($questionId, $answer, $studentId)
 {
 
 	$tsql_callSP = "{call AnswerQuestion( ?, ?, ?, ? )}";
@@ -97,6 +100,8 @@ function AnswerQuestion($questionId, $answer,$studentId)
 	/*Free the statement and connection resources. */
 	sqlsrv_free_stmt( $stmt3);
 	sqlsrv_close( $conn);
+	
+	return $result;
 
 }
 
