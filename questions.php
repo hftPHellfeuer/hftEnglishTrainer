@@ -104,7 +104,7 @@ function addQuestionToChapter($Question,$Answer , $ChapterId)
 {
 	/* Define the Transact-SQL query. Use question marks (?) in place of
     the parameters to be passed to the stored procedure */
-	$tsql_callSP = "{call AddQuestionToChapter( ?, ?, ?)}";
+	$tsql_callSP = "{call AddQuestionToChapter( ?, ?, ?,?)}";
 
 	/* Define the parameter array. By default, the first parameter is an
     INPUT parameter. The second parameter is specified as an INOUT
@@ -113,14 +113,17 @@ function addQuestionToChapter($Question,$Answer , $ChapterId)
     initialized before calling the stored procedure, or the desired
     PHPTYPE should be specified in the $params array.*/
 
+    $result= -1;
 	$params = array(
 		array($Question, SQLSRV_PARAM_IN),
 		array($Answer, SQLSRV_PARAM_IN),
-		array($ChapterId, SQLSRV_PARAM_IN)
+		array($ChapterId, SQLSRV_PARAM_IN),
+        array($result, SQLSRV_PARAM_OUT)
 	);
 
-	/* Execute the query. */
+
 	$conn = OpenConnection ();
+	/* Execute the query. */
 	$stmt3 = sqlsrv_query( $conn, $tsql_callSP, $params);
 	if( $stmt3 === false )
 	{
@@ -128,16 +131,10 @@ function addQuestionToChapter($Question,$Answer , $ChapterId)
 		die( print_r( sqlsrv_errors(), true));
 	}
 
-	/* Display the value of the output parameter $vacationHrs. */
-	sqlsrv_next_result($stmt3);
-    $result = sqlsrv_fetch($stmt3);
-    $name = sqlsrv_get_field( $stmt3, 0);
-    echo "$name: ";
-    echo($result);
-
 	/*Free the statement and connection resources. */
 	sqlsrv_free_stmt( $stmt3);
 	CloseConnection ( $conn );
+    return $result;
 }
 
 

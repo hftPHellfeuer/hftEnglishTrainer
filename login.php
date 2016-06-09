@@ -1,25 +1,27 @@
 <?php
+include 'userManagement.php';
+
 session_start ();
-$pdo = new PDO ( 'mysql:host=localhost;dbname=php-einfach', 'root', '' );
 
 if (isset ( $_GET ['login'] )) {
 	$email = $_POST ['email'];
 	$passwort = $_POST ['passwort'];
 	
-	$statement = $pdo->prepare ( "SELECT * FROM users WHERE email = :email" );
-	$result = $statement->execute ( array (
-			'email' => $email 
-	) );
-	$user = $statement->fetch ();
-	
-	// Überprüfung des Passworts
-	if ($user !== false && password_verify ( $passwort, $user ['passwort'] )) {
-		$_SESSION ['userid'] = $user ['id'];
-		die ( 'Login erfolgreich. Weiter zu <a href="geheim.php">internen Bereich</a>' );
-	} else {
-		$errorMessage = "E-Mail oder Passwort war ungültig<br>";
-	}
+   $result = login($email, $passwort);
+   
+   if ($result ==null){
+       echo "<div class='jumbotron col-md-6 col-md-offset-3' > <h3>User / password wrong</h3></div>";
+    }else{
+       $_SESSION['id'] = $result[0];
+       $_SESSION['name'] = $result[1];
+       $_SESSION['email'] = $result[2];
+       $_SESSION['teacher'] = $result[3];
+       header("Location: test.php");
+    }
+    
 }
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -33,12 +35,27 @@ if (isset ( $errorMessage )) {
 	echo $errorMessage;
 }
 ?>
- 
+
+    <!-- Bootstrap core CSS -->
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+<div class="jumbotron col-md-6 col-md-offset-3">
+    <h1>
+        Login
+        </h1>
 <form action="?login=1" method="post">
-		E-Mail:<br> <input type="email" size="40" maxlength="250" name="email"><br>
-		<br> Dein Passwort:<br> <input type="password" size="40"
-			maxlength="250" name="passwort"><br> <input type="submit"
-			value="Abschicken">
-	</form>
+            <div class="form-group ">
+              <input type="email" placeholder="Email" name="email" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="password" name="passwort" placeholder="Password" class="form-control">
+            </div>
+            <br>
+            <button type="submit" class="btn btn-success btn-lg">Sign in</button>
+</form>
+</div>
 </body>
 </html>
