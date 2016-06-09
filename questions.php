@@ -51,7 +51,6 @@ function getQuestionsForChapter($chapterId, $studentId)
 		die ( print_r ( sqlsrv_errors (), true ) );
 	} else {
 		$count = 0;
-		echo "Questions:<br/>";
 		while ( $row = sqlsrv_fetch_array ( $stmt, SQLSRV_FETCH_ASSOC ) ) {
 			//echo ($row ['Text'] . " -> " . $row ['Answer']);
 			//echo ("<br/>");

@@ -12,31 +12,12 @@
 <br />
 <br />
 
-<?php
-include 'questions.php';
-
-// AnswerQuestion(8, 'PhP',2);
-
-$questions = getQuestionsForChapter ( 1, 1 );
-
-foreach ( $questions as $question ){
-	echo 'Please answer the following question: <br/>';
-	echo $question['Text'] . '? <br>';
-	echo 'Answer:';
-	echo '<input type="text" name="Answer" value=""><br/>';
-	echo '<input type="submit" value="Submit"><br/>';
-
-	//Check if answer was correct and display right solution if it wasn't
-	//answerQuestion($question['Id'], Answer, 1);
-	
-	
-	//Continue
-}
-	
-	
-print_r ( $questions );
-
-// GetQuestions ();
+<?php 
+echo '	<form name="form" action="question_show.php" method="get">
+			Please enter the chapter: <input type="text" name="Chapter" value="1"><br/>
+			<input type="hidden" name="i" value="0"><br/>
+			<input type="submit" value="Start the Quiz!"><br/>
+		</form>';
 
 ?>
 </html>
