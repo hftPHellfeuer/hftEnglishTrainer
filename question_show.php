@@ -1,28 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Question</title>
+</head>
+<body>
+
+	<!-- Bootstrap core CSS -->
+	<link href="dist/css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<link href="assets/css/ie10-viewport-bug-workaround.css"
+		rel="stylesheet">
+
+	<div class="jumbotron col-md-6 col-md-offset-3">
 <?php
 include 'questions.php';
 
 $questions = getQuestionsForChapter ( 1, 1 );
 
 if ($_GET ['i'] == count ( $questions )) {
-	echo ("All questions answered. Go to new chapter.");
-	echo '	<form name="form" action="index.php" method="get">
-				<input type="submit" value="Go back to main page!"><br/>
-			</form>';
-} else {
-	handleOneQuestion ( $questions[ $_GET ['i']] );
-}
+	echo '
 
-function handleOneQuestion($question) {
-	echo 'Please answer the following question: <br/>';
-	echo $question ['Text'] . '? <br>';
-	echo 'Answer:';
-	echo '<form name="form" action="question_check.php" method="get">' .
-			"<input type=\"hidden\" name=\"questionId\"value=" . $question ['Id'] . ">" .
-			'<input type="hidden" name="i" value="'.$_GET ['i'].'"><br/>
-			 <input type="text" name="studentAnswer" id="studentAnswer" value=""><br/>
-			<input type="submit" value="Submit"><br/>
-		  </form>';
+		<h1>All questions answered. Go to new chapter</h1>
+		<form name="form" action="index.php" method="get">
+			<div class="form-group ">
+				<input type="submit" value="Go back to main page!"
+					class="btn btn-success btn-lg"><br />
+			</div>
+		</form>';
 
-	echo 'Debug: Id: ' . $question ['Id'] . ' Answer: ' . $question ['Answer'] . '<br/><br/>';
+	} else { handleOneQuestion ( $questions[ $_GET ['i']] ); } 
+	
+	
+	function handleOneQuestion($question) {
+		echo '<h1>Please answer the following question</h1>'; 
+		echo '<div class="form-group ">'.$question ['Text'] . '?</div>'; 
+		echo '<form name="form" action="question_check.php" method="get">' .
+					"<input type=\"hidden\" name=\"questionId\"value=" . $question ['Id'] . ">" . 
+					'<input type="hidden" name="i" value="'.$_GET ['i'].'">
+					<div class="form-group "><input type="text" name="studentAnswer" id="studentAnswer" value="" class="form-control"></div>
+					<div class="form-group "><input type="submit" value="Submit" class="btn btn-success btn-lg"></div>
+			</form>
+	'; 
+	echo 'Debug: Id: ' . $question ['Id'] . ' Answer: ' . $question	['Answer'] . '	<br />	<br />';
 }
 ?>
+</div>
+<?php
+echo 'DEBUG <br/> QuestionId: ' . $_GET ['questionId'] . '<br/>';
+echo 'Answer: ' . $_GET ['studentAnswer'] . '<br/>';
+?>
+</body>
+</html>
