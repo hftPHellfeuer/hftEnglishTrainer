@@ -1,19 +1,16 @@
 <html>
-<a href="login.php">Login</a>
-<a href="logout.php">Logout</a>
-<a href="register.php">Register</a>
-<a href="admin.php">Admin</a>
+<?php
+session_start();
+include_once 'chapters.php';
+include_once 'navigationBar.php';
+		
+		navigationBar();
 
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-
-<?php 
-include 'chapters.php';
+if (isset($_SESSION['id'])) {
+	echo($_SESSION['id']);
+}else{
+	echo('session is empty');
+}
 		echo "<h1>Chapters</h1>";
 		$chapters = getAllChapters();
 		foreach ($chapters as $chapter){

@@ -1,8 +1,6 @@
 <?php
 include 'userManagement.php';
 
-session_start ();
-
 if (isset ( $_GET ['login'] )) {
 	$email = $_POST ['email'];
 	$passwort = $_POST ['passwort'];
@@ -12,7 +10,10 @@ if (isset ( $_GET ['login'] )) {
    if ($result ==null){
        echo "<div class='jumbotron col-md-6 col-md-offset-3' > <h3>User / password wrong</h3></div>";
     }else{
-       header("Location: test.php");
+       echo ($result[0]);
+
+       echo ($_SESSION['id']);
+       header("Location: index.php");
     }
     
 }
