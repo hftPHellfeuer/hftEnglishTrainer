@@ -1,7 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Check your answer</title>
+
+	<?php
+	include_once 'questions.php';
+	include_once 'userManagement.php';
+
+	$i = $_GET ['i'] + 1;
+	// Check if answer was correct and display right solution if it wasn't
+
+	$questions = getQuestionsForChapter ( 1, 1 );
+	$myQuestion = $questions[$i -1];
+	$result = answerQuestion($_GET['questionId'], $_GET['studentAnswer'], getUserId());
+	if ($result== 0)
+	{
+		$title = 'Good Job!';
+	}elseif($result == 1){
+		$title = 'Sorry that\'s wrong...';
+	}else{
+		$title = 'Error Code: 0'. $result;
+	}
+	//$result = "Not correct.";
+	echo('<title>'.$title.'</title>');
+
+	?>
+
+
 </head>
 <body>
 
@@ -12,34 +36,22 @@
 	<link href="assets/css/ie10-viewport-bug-workaround.css"
 		rel="stylesheet">
     
-<?php
-include_once 'questions.php';
-include_once 'userManagement.php';
 
-$i = $_GET ['i'] + 1;
-// Check if answer was correct and display right solution if it wasn't
-echo($_GET['questionId']);
-echo( $_GET['studentAnswer']);
-echo(getUserId());
-
- $result = answerQuestion($_GET['questionId'], $_GET['studentAnswer'], getUserId());
-
-//$result = "Not correct.";
-?>
 
 	<div class="jumbotron col-md-6 col-md-offset-3">
-		<h1>Check your answer</h1>
+		<h1><?php   echo($title) ?></h1>
 		<form name="form" action="question_show.php" method="get">
 			<div class="form-group ">
-			Answer given: <?php echo $_GET ['studentAnswer'] ?>	
-			</div>
-			<div class="form-group ">
-			Status: <?php echo $result; ?>	
+				<?php
+					echo('<p><h2>'.$myQuestion ['Text']. ':  </h2></p>');
+					echo('<p><h2> Correct Answer: ' .$myQuestion ['Answer']. '</h2></p>');
+					echo ('<p><h2> Your Answer: ' .$_GET ['studentAnswer'].'</h2></p>') ?>
+
 			</div>
 			<input type="hidden" name="nextQuestion" value="nextQuestion"
 				class="form-control"> <input type="hidden" name="i"
 				value="<?php echo $i?>">
-
+			<br>
 			<div class="form-group ">
 				<input type="submit" value="Next question"
 					class="btn btn-success btn-lg">
@@ -49,8 +61,8 @@ echo(getUserId());
 
 	</div>
 <?php
-echo 'DEBUG <br/> QuestionId: ' . $_GET ['questionId'] . '<br/>';
-echo 'Answer: ' . $_GET ['studentAnswer'] . '<br/>';
+//echo 'DEBUG <br/> QuestionId: ' . $_GET ['questionId'] . '<br/>';
+//echo 'Answer: ' . $_GET ['studentAnswer'] . '<br/>';
 ?>
 </body>
 

@@ -33,8 +33,7 @@ if ($_GET ['i'] == count ( $questions )) {
 	
 	
 	function handleOneQuestion($question) {
-		echo '<h1>Please answer the following question</h1>'; 
-		echo '<div class="form-group ">'.$question ['Text'] . '?</div>'; 
+		echo '<h2>'.$question ['Text'].'</h2>';
 		echo '<form name="form" action="question_check.php" method="get">' .
 					"<input type=\"hidden\" name=\"questionId\"value=" . $question ['Id'] . ">" . 
 					'<input type="hidden" name="i" value="'.$_GET ['i'].'">
@@ -42,7 +41,7 @@ if ($_GET ['i'] == count ( $questions )) {
 					<div class="form-group "><input type="submit" value="Submit" class="btn btn-success btn-lg"></div>
 			</form>
 	'; 
-		echo 'Debug: Id: ' . $question ['Id'] . ' Answer: ' . $question	['Answer'] . '	<br />	<br />';
+		
 	
 }
 ?>

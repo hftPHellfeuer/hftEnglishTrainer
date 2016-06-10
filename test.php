@@ -9,7 +9,7 @@ include_once 'db_access.php';
 
 
 $questionId = 1;
-$answer = 'car';
+$answer = 'eight';
 $studentId = 1;
 $tsql_callSP = "{call AnswerQuestion( ?, ?, ?, ? )}";
 $result= -1;
