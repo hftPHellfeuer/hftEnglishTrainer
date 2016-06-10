@@ -17,7 +17,7 @@ include 'chapters.php';
 		echo "<h1>Chapters</h1>";
 		$chapters = getAllChapters();
 		foreach ($chapters as $chapter){
-			echo $chapter['Id'] . " Name " . $chapter['Name']. " Descr. " . $chapter['Description'];
+			echo $chapter['Id'] . " Name " . $chapter['Name']. " Descr. " . $chapter['Description'] . '<br/>';
 		}
 		
 		echo "<h1>Start the game</h1>";

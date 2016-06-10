@@ -2,7 +2,7 @@
 include 'chapters.php';
 session_start ();
 if (isset ( $_GET ['insert'] )) {
-	$name= $_POST ['chapter'];
+	$name= $_POST ['name'];
 	$description = $_POST ['description'];
    $result = addChapter( $name, $description );
    echo($result); //TODO Check return values
@@ -43,7 +43,7 @@ if (isset ( $errorMessage )) {
             </div>
             <div class="form-group ">Description:</div>
             <div class="form-group">
-              <input type="text" name="description" placeholder="question" class="form-control">
+              <input type="text" name="description" class="form-control">
             </div>
             <br>
             <button type="submit" class="btn btn-success btn-lg">Insert</button>
