@@ -1,6 +1,13 @@
 <?php
-session_start ();
-session_destroy ();
+include userManagement.php;
+if (isLogedIn())
+{
+    echo "logged In <br>";
+}
+if (isTeacher())
+{
+    echo "Teacher";
+}
 
 echo "Logout erfolgreich";
 ?>
