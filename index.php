@@ -1,16 +1,22 @@
 <html>
 <?php
 session_start();
+session_unset();
+session_regenerate_id(true);
 include_once 'chapters.php';
 include_once 'navigationBar.php';
 		
 		navigationBar();
 
-if (isset($_SESSION['id'])) {
-	echo($_SESSION['id']);
-}else{
-	echo('session is empty');
+$cookie_name = 'id';
+if(!isset($_COOKIE[$cookie_name])) {
+	echo "Cookie named '" . $cookie_name . "' is not set!";
+} else {
+	echo "Cookie '" . $cookie_name . "' is set!<br>";
+	echo "Value is: " . $_COOKIE[$cookie_name];
 }
+
+
 		echo "<h1>Chapters</h1>";
 		$chapters = getAllChapters();
 		foreach ($chapters as $chapter){

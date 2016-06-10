@@ -47,6 +47,7 @@ function internalLogin($email, $password, $teacher)
             $_SESSION['name'] = $result[1];
             $_SESSION['email'] = $result[2];
             $_SESSION['teacher'] = $result[3];
+            setcookie("id", $result[0], time()+3600, '/', Null);
             session_write_close();
         }
         return $userinfo;
