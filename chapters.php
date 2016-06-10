@@ -29,9 +29,9 @@ function addChapter($name, $description){
 	
 }
 
-function getAllChapters() {
+function getAllChapters($studentID) {
 	
-	$sql = "SELECT * FROM Chapter";
+	$sql = "SELECT * from Chapter inner join Student_Chapter on Chapter_Id = Id Where Student_Id = '{$studentID}'";
 	
 	$conn = OpenConnection ();
 	

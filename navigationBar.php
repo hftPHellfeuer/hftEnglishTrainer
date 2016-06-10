@@ -9,6 +9,11 @@ function navigationBar()
     {
         $adminExtras = '<li><a href="admin.php">Admin</a></li>';
     }
+    $welcomeString=  '';
+    if (isLogedIn())
+    {
+        $welcomeString=  '<span class="glyphicon glyphicon-user" aria-hidden="true"></span> '. 'Welcome '.getUserName();
+    }
   echo(
 
         '
@@ -23,27 +28,28 @@ function navigationBar()
               <ul class="nav navbar-nav">
                 <li class="active"><a href="index.php">English Trainer <span class="sr-only">(current)</span></a></li>'.
                 $adminExtras.
-              '</ul>');
+              '</ul>
+               <ul class="nav navbar-nav navbar-right">   
+                <li><a><b>  ' . $welcomeString . '     </b></a></li>
+              ');
+
 
 if (isLogedIn())
 {
-  echo('
-         <ul class="nav navbar-nav navbar-right">         
+  echo('             
                <li><a href="logout.php">Logout</a></li>
-         </ul>
-         ');
+     ');
 }else
 {
     echo('
-         <ul class="nav navbar-nav navbar-right">         
                 <li><a href="login.php">Login</a></li>
                 <li><a href="register.php">Register</a></li>
-         </ul>
          ');
 }
 
 
 echo('      
+                </ul>
               </div>
           </div><!-- /.container-fluid -->
         </nav>'

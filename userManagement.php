@@ -43,12 +43,10 @@ function internalLogin($email, $password, $teacher)
 
 
         if ($userinfo != null) {
-            $_SESSION['id'] = $result[0];
-            $_SESSION['name'] = $result[1];
-            $_SESSION['email'] = $result[2];
-            $_SESSION['teacher'] = $result[3];
-            setcookie("id", $result[0], time()+3600, '/', Null);
-            session_write_close();
+            setcookie("user_id", $userinfo[0], time()+360000, '/', Null);
+            setcookie("user_name", $userinfo[1], time()+360000, '/', Null);
+            setcookie("user_email", $userinfo[2], time()+360000, '/', Null);
+            setcookie("user_teacher", $userinfo[3], time()+360000, '/', Null);
         }
         return $userinfo;
     }
@@ -57,41 +55,50 @@ function internalLogin($email, $password, $teacher)
 
     function logout()
     {
-        unset($_SESSION['id'] );
-        unset($_SESSION['name'] );
-        unset($_SESSION['email'] );
-        unset($_SESSION['teacher'] );
+        setcookie("user_id", "", time()-360000, '/', Null);
+        setcookie("user_name","", time()-360000, '/', Null);
+        setcookie("user_email", "", time()-360000, '/', Null);
+        setcookie("user_teacher","", time()-360000, '/', Null);
     }
 
     function isLogedIn()
     {
-        return isset($_SESSION['id']) ;
+        return isset($_COOKIE['user_id']);
     }
 
     function isTeacher()
     {
-        return isset($_SESSION['teacher']) && $_SESSION['teacher'] == true;
+        return isset($_COOKIE['user_teacher']) && $_COOKIE['user_teacher'] == true;
     }
 
-    function getUserInfo()
+    function getUserName()
     {
-        if (isset($_SESSION['id']))
+        if (isset($_COOKIE['user_id']))
         {
-            return array($_SESSION['id'], $_SESSION['name'], $_SESSION['email'], $_SESSION['teacher']);
+            return $_COOKIE['user_name'];
         }else{
             return null;
         }
-
     }
 
-    function registerUser($email, $password)
+    function getUserId()
     {
-        $sql = "INSERT INTO [dbo].[Student] values('{$email}' ,'{$password}')";
+        if (isset($_COOKIE['user_id']))
+        {
+            return $_COOKIE['user_id'];
+        }else{
+            return null;
+        }
+    }
+
+    function registerUser($Name, $email, $password)
+    {
+        $sql = "INSERT INTO [dbo].[Student] values('{$Name}' ,'{$email}' ,'{$password}')";
         $conn = OpenConnection();
         $result = sqlsrv_query($conn, $sql);
         #checks if the search was made
-        if ($result == false) {
-            sqlsrv_free_stmt($result);
+        if ($result === false) {
+           // sqlsrv_free_stmt($result);
             CloseConnection($conn);
             return null;
         }

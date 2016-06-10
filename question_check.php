@@ -13,11 +13,18 @@
 		rel="stylesheet">
     
 <?php
-include 'questions.php';
+include_once 'questions.php';
+include_once 'userManagement.php';
+
 $i = $_GET ['i'] + 1;
 // Check if answer was correct and display right solution if it wasn't
-// $result = answerQuestion($_GET['questionId'], $_GET['studentAnswer'], 1);
-$result = "Not correct.";
+echo($_GET['questionId']);
+echo( $_GET['studentAnswer']);
+echo(getUserId());
+
+ $result = answerQuestion($_GET['questionId'], $_GET['studentAnswer'], getUserId());
+
+//$result = "Not correct.";
 ?>
 
 	<div class="jumbotron col-md-6 col-md-offset-3">

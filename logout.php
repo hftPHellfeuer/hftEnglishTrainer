@@ -1,13 +1,7 @@
 <?php
-include userManagement.php;
-if (isLogedIn())
-{
-    echo "logged In <br>";
-}
-if (isTeacher())
-{
-    echo "Teacher";
-}
+include 'userManagement.php';
 
-echo "Logout erfolgreich";
+logout();
+header("Location: index.php");
+
 ?>

@@ -1,18 +1,19 @@
 <?php
-include 'userManagement.php';
+include_once 'userManagement.php';
 
 session_start ();
 
 if (isset ( $_GET ['register'] )) {
 	$email = $_POST ['email'];
 	$passwort = $_POST ['passwort'];
+    $name = $_POST ['name'];
 	
-   $result = register($email, $passwort);
+   $result = registerUser($name, $email, $passwort);
    
    if ($result ==null){
        echo "<div class='jumbotron col-md-6 col-md-offset-3' > <h3> Can not register Student</h3></div>";
     }else{
-       header("Location: test.php");
+       header("Location: index.php");
     }
     
 }
@@ -22,7 +23,7 @@ if (isset ( $_GET ['register'] )) {
 <!DOCTYPE html>
 <html>
 <head>
-<title>Login</title>
+<title>Register</title>
 </head>
 <body>
  
@@ -40,9 +41,12 @@ if (isset ( $errorMessage )) {
 
 <div class="jumbotron col-md-6 col-md-offset-3">
     <h1>
-        Login
+        Register
         </h1>
 <form action="?register=1" method="post">
+            <div class="form-group ">
+                <input type="text" placeholder="Name" name="name" class="form-control">
+            </div>
             <div class="form-group ">
               <input type="email" placeholder="Email" name="email" class="form-control">
             </div>

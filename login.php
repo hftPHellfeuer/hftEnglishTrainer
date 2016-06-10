@@ -10,9 +10,6 @@ if (isset ( $_GET ['login'] )) {
    if ($result ==null){
        echo "<div class='jumbotron col-md-6 col-md-offset-3' > <h3>User / password wrong</h3></div>";
     }else{
-       echo ($result[0]);
-
-       echo ($_SESSION['id']);
        header("Location: index.php");
     }
     
@@ -43,7 +40,7 @@ if (isset ( $errorMessage )) {
     <h1>
         Login
         </h1>
-<form action="?login=1" method="post">
+            <form action="?login=1" method="post">
             <div class="form-group ">
               <input type="email" placeholder="Email" name="email" class="form-control">
             </div>
@@ -51,7 +48,7 @@ if (isset ( $errorMessage )) {
               <input type="password" name="passwort" placeholder="Password" class="form-control">
             </div>
             <br>
-            <button type="submit" class="btn btn-success btn-lg">Sign in</button>
+            <button type="submit" class="btn btn-success btn-lg">Log in</button>
 </form>
 </div>
 </body>
