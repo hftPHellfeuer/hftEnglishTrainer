@@ -1,5 +1,10 @@
 <?php
 include 'db_access.php';
+
+function addChapter($name, $description){
+	
+}
+
 function getAllChapters() {
 	
 	$sql = "SELECT * FROM Chapter";

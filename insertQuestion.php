@@ -38,12 +38,15 @@ if (isset ( $errorMessage )) {
         Add new Questions
         </h1>
 <form action="?insert=1" method="post">
+			<div class="form-group ">Chapter name:</div>
             <div class="form-group ">
               <input type="text" name="chapter" class="form-control">
             </div>
+            <div class="form-group ">Question:</div>
             <div class="form-group">
               <input type="text" name="question" placeholder="question" class="form-control">
             </div>
+            <div class="form-group ">Answer:</div>
             <div class="form-group">
               <input type="text" name="answer" placeholder="answer" class="form-control">
             </div>
