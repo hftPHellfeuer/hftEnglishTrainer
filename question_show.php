@@ -21,7 +21,8 @@ navigationBar();
 
 include 'questions.php';
 
-$questions = getQuestionsForChapter ( $_POST['Chapter'], getUserId() );
+$chapterId = $_POST['Chapter'];
+$questions = getQuestionsForChapter ( $chapterId, getUserId() );
 
 if ($_POST ['i'] == count ( $questions )) {
 	echo '
@@ -49,7 +50,8 @@ if ($_POST ['i'] == count ( $questions )) {
 					<div class="form-group "><input type="submit" value="Submit" class="btn btn-success btn-lg"></div>
 			</form>
 	'; 
-		echo 'Debug: Id: ' . $question ['Id'] . ' Answer: ' . $question	['Answer'] . '	<br />	<br />';
+		echo 'Debug: Id: ' . $question ['Id'] . ' Answer: ' . $question	['Answer'] . '	<br /> <br />';
+		echo "Chapter: " .  $_POST ['Chapter'];
 	
 }
 ?>

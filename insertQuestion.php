@@ -1,5 +1,6 @@
 <?php
 include 'questions.php';
+include 'chapters.php';
 session_start ();
 
 ?>
@@ -49,16 +50,23 @@ if (isset ( $errorMessage )) {
 		<form action="?insert=1" method="post">
 			<div class="form-group ">Chapter name:</div>
 			<div class="form-group ">
-				<input type="text" name="chapter" class="form-control">
+			<?php 
+			$chapters = getAllChaptersAdmin ();
+			echo '<select name="chapter" class="form-control">';
+			foreach ( $chapters as $chapter ) {
+				echo '<option value="' . $chapter ['Id'] . '">' . $chapter ['Name'] . " (" . $chapter ['Description'] . ") </option>";
+			}
+			echo "</select>";
+			?>
 			</div>
 			<div class="form-group ">Question:</div>
 			<div class="form-group">
-				<input type="text" name="question" placeholder="question"
+				<input type="text" name="question" placeholder="Your question"
 					class="form-control">
 			</div>
 			<div class="form-group ">Answer:</div>
 			<div class="form-group">
-				<input type="text" name="answer" placeholder="answer"
+				<input type="text" name="answer" placeholder="Your answer"
 					class="form-control">
 			</div>
 			<br>

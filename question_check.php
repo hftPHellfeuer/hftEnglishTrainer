@@ -66,6 +66,7 @@ echo 'DEBUG <br/> QuestionId: ' . $_POST ['questionId'] . '<br/>';
 echo 'studentAnswer: ' . $_POST ['studentAnswer'] . '<br/>';
 echo 'correctAnswer: ' . $_POST ['Answer'] . '<br/>';
 echo "StudentID: " . getUserId();
+echo "Chapter: " .  $_POST ['Chapter'];
 ?>
 </body>
 
