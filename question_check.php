@@ -20,17 +20,17 @@ include_once 'navigationBar.php';
 include_once 'questions.php';
 include_once 'userManagement.php';
 
-$i = $_GET ['i'] + 1;
-$chapter = $_GET['Chapter'];
+$i = $_POST ['i'] + 1;
+$chapter = $_POST['Chapter'];
 
 // Check if answer was correct and display right solution if it wasn't
 
- $result = answerQuestion($_GET['questionId'], $_GET['studentAnswer'], getUserId());
+ $result = answerQuestion($_POST['questionId'], $_POST['studentAnswer'], getUserId());
  
  if ($result == 0){
  	$resultText = "Correct Answer.";
  } else if($result == 1){
- 	$resultText = "Wrong Answer.";
+ 	$resultText = "Wrong Answer. Correct answer is: " .$_POST['Answer'];
  } else if($result == 2){
  	$resultText = "You are not allowed to answer that question. Ask your teacher to unlock this Chapter for you.";
  } else if($result == 3){
@@ -42,15 +42,15 @@ $chapter = $_GET['Chapter'];
 
 	<div class="jumbotron col-md-6 col-md-offset-3">
 		<h1>Check your answer</h1>
-		<form name="form" action="question_show.php" method="get">
+		<form name="form" action="question_show.php" method="post">
 			<div class="form-group ">
-			Answer given: <?php echo $_GET ['studentAnswer'] ?>	
+			Answer given: <?php echo $_POST ['studentAnswer'] ?>	
 			</div>
 			<div class="form-group ">
 			Status: <?php echo $resultText; ?>	
 			</div>
 			<input type="hidden" name="nextQuestion" value="nextQuestion">
-			<input type="hidden" name="i"	value="<?php echo $i?>">
+			<input type="hidden" name="i" value="<?php echo $i?>">
 			<input type="hidden" name="Chapter" value="<?php echo $chapter?>">
 
 			<div class="form-group ">
@@ -62,8 +62,9 @@ $chapter = $_GET['Chapter'];
 
 	</div>
 <?php
-echo 'DEBUG <br/> QuestionId: ' . $_GET ['questionId'] . '<br/>';
-echo 'Answer: ' . $_GET ['studentAnswer'] . '<br/>';
+echo 'DEBUG <br/> QuestionId: ' . $_POST ['questionId'] . '<br/>';
+echo 'studentAnswer: ' . $_POST ['studentAnswer'] . '<br/>';
+echo 'correctAnswer: ' . $_POST ['Answer'] . '<br/>';
 echo "StudentID: " . getUserId();
 ?>
 </body>

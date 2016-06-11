@@ -23,7 +23,7 @@ if (isLogedIn ()) {
 			print_chapters ( $chapters );
 
 			echo "<h1>Start the game</h1>";
-			echo '	<form name="form" action="question_show.php" method="get">
+			echo '	<form name="form" action="question_show.php" method="post">
 				Please select the chapter:';
 			
 			echo '<select name="Chapter" class="form-control">';
@@ -43,7 +43,7 @@ if (isLogedIn ()) {
 echo ('</div>');
 function print_chapters($chapters) {
 	foreach ( $chapters as $chapter ) {
-		echo '<p><b>' . $chapter ['Id'] . ')</b><u>' . $chapter ['Name'] . "</u>: " . $chapter ['Description'] . '</p>';
+		echo '<p><b>' . $chapter ['Id'] . ')</b><u> ' . $chapter ['Name'] . "</u>: " . $chapter ['Description'] . '</p>';
 	}
 }
 

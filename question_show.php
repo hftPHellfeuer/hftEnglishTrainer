@@ -21,9 +21,9 @@ navigationBar();
 
 include 'questions.php';
 
-$questions = getQuestionsForChapter ( $_GET['Chapter'], getUserId() );
+$questions = getQuestionsForChapter ( $_POST['Chapter'], getUserId() );
 
-if ($_GET ['i'] == count ( $questions )) {
+if ($_POST ['i'] == count ( $questions )) {
 	echo '
 
 		<h1>All questions answered. Go to new chapter</h1>
@@ -34,16 +34,17 @@ if ($_GET ['i'] == count ( $questions )) {
 			</div>
 		</form>';
 
-	} else { handleOneQuestion ( $questions[ $_GET ['i']]); } 
+	} else { handleOneQuestion ( $questions[ $_POST ['i']]); } 
 	
 	
 	function handleOneQuestion($question) {
 		echo '<h1>Please answer the following question</h1>'; 
 		echo '<div class="form-group ">'.$question ['Text'] . '?</div>'; 
-		echo '<form name="form" action="question_check.php" method="get">' .
+		echo '<form name="form" action="question_check.php" method="post">' .
 					"<input type=\"hidden\" name=\"questionId\"value=" . $question ['Id'] . ">" . 
-					'<input type="hidden" name="i" value="'.$_GET ['i'].'"> 
-					<input type="hidden" name="Chapter" value="'.$_GET['Chapter'].'">
+					'<input type="hidden" name="Answer" value="'.$question ['Answer'].'"> 
+					<input type="hidden" name="i" value="'.$_POST ['i'].'"> 
+					<input type="hidden" name="Chapter" value="'.$_POST['Chapter'].'">
 					<div class="form-group "><input type="text" name="studentAnswer" id="studentAnswer" value="" class="form-control"></div>
 					<div class="form-group "><input type="submit" value="Submit" class="btn btn-success btn-lg"></div>
 			</form>
