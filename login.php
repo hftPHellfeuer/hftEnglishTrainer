@@ -25,6 +25,10 @@ if (isset ( $_GET ['login'] )) {
 <body>
  
 <?php
+include_once 'navigationBar.php';
+
+navigationBar();
+
 if (isset ( $errorMessage )) {
 	echo $errorMessage;
 }

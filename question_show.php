@@ -14,6 +14,10 @@
 
 	<div class="jumbotron col-md-6 col-md-offset-3">
 <?php
+include_once 'navigationBar.php';
+
+navigationBar();
+
 include 'questions.php';
 
 $questions = getQuestionsForChapter ( 1, 1 );

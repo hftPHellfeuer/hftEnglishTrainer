@@ -19,6 +19,9 @@ include_once 'navigationBar.php';
 		foreach ( $chapters as $chapter ) {
 			echo '<p><b>' . $chapter ['Id'] . ')</b><u>' . $chapter ['Name'] . "</u>: " . $chapter ['Description'] . '</p>';
 		}
+		
+		//TODO use combobox?
+		
 		echo "<h1>Start the game</h1>";
 		echo '	<form name="form" action="question_show.php" method="get">
 				Please enter the chapter: <input type="text" name="Chapter" value="1"><br/>

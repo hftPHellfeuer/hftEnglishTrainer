@@ -13,6 +13,10 @@
 		rel="stylesheet">
     
 <?php
+include_once 'navigationBar.php';
+		
+		navigationBar();
+		
 include_once 'questions.php';
 include_once 'userManagement.php';
 

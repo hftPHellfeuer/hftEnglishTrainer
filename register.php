@@ -28,6 +28,10 @@ if (isset ( $_GET ['register'] )) {
 <body>
  
 <?php
+include_once 'navigationBar.php';
+
+navigationBar();
+
 if (isset ( $errorMessage )) {
 	echo $errorMessage;
 }
