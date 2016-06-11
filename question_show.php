@@ -21,7 +21,7 @@ navigationBar();
 
 include 'questions.php';
 
-$questions = getQuestionsForChapter ( 1, 1 );
+$questions = getQuestionsForChapter ( $_GET['Chapter'], getUserId() );
 
 if ($_GET ['i'] == count ( $questions )) {
 	echo '
