@@ -11,12 +11,13 @@
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 	<link href="assets/css/ie10-viewport-bug-workaround.css"
 		rel="stylesheet">
-
-	<div class="jumbotron col-md-6 col-md-offset-3">
 <?php
 include_once 'navigationBar.php';
 
 navigationBar();
+?>
+	<div class="jumbotron col-md-6 col-md-offset-3">
+<?php
 
 include 'questions.php';
 
