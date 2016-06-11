@@ -34,7 +34,7 @@ if ($_GET ['i'] == count ( $questions )) {
 			</div>
 		</form>';
 
-	} else { handleOneQuestion ( $questions[ $_GET ['i']] ); } 
+	} else { handleOneQuestion ( $questions[ $_GET ['i']]); } 
 	
 	
 	function handleOneQuestion($question) {
@@ -42,7 +42,8 @@ if ($_GET ['i'] == count ( $questions )) {
 		echo '<div class="form-group ">'.$question ['Text'] . '?</div>'; 
 		echo '<form name="form" action="question_check.php" method="get">' .
 					"<input type=\"hidden\" name=\"questionId\"value=" . $question ['Id'] . ">" . 
-					'<input type="hidden" name="i" value="'.$_GET ['i'].'">
+					'<input type="hidden" name="i" value="'.$_GET ['i'].'"> 
+					<input type="hidden" name="Chapter" value="'.$_GET['Chapter'].'">
 					<div class="form-group "><input type="text" name="studentAnswer" id="studentAnswer" value="" class="form-control"></div>
 					<div class="form-group "><input type="submit" value="Submit" class="btn btn-success btn-lg"></div>
 			</form>

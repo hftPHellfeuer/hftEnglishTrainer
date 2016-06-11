@@ -21,6 +21,8 @@ include_once 'questions.php';
 include_once 'userManagement.php';
 
 $i = $_GET ['i'] + 1;
+$chapter = $_GET['Chapter'];
+
 // Check if answer was correct and display right solution if it wasn't
 
  $result = answerQuestion($_GET['questionId'], $_GET['studentAnswer'], getUserId());
@@ -47,9 +49,9 @@ $i = $_GET ['i'] + 1;
 			<div class="form-group ">
 			Status: <?php echo $resultText; ?>	
 			</div>
-			<input type="hidden" name="nextQuestion" value="nextQuestion"
-				class="form-control"> <input type="hidden" name="i"
-				value="<?php echo $i?>">
+			<input type="hidden" name="nextQuestion" value="nextQuestion">
+			<input type="hidden" name="i"	value="<?php echo $i?>">
+			<input type="hidden" name="Chapter" value="<?php echo $chapter?>">
 
 			<div class="form-group ">
 				<input type="submit" value="Next question"
