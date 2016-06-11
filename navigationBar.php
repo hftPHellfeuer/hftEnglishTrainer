@@ -8,8 +8,8 @@ function navigationBar()
     if (isTeacher())
     {
         $adminExtras = '<li><a href="admin.php">Admin</a></li>';
-        $adminExtras += '<li><a href="insertChapter.php">Insert Chapter</a></li>';
-        $adminExtras += '<li><a href="insertQuestion.php">Insert Question</a></li>';
+        $adminExtras = $adminExtras.'<li><a href="insertChapter.php">Insert Chapter</a></li>';
+        $adminExtras = $adminExtras.'<li><a href="insertQuestion.php">Insert Question</a></li>';
     }
     $welcomeString=  '';
     if (isLogedIn())
