@@ -11,8 +11,13 @@ include_once 'navigationBar.php';
 
 		echo "<h1>Chapters</h1>";
 		$chapters = getAllChapters(getUserId());
-		foreach ($chapters as $chapter){
-			echo '<p><b>' .$chapter['Id']. ')</b><u>'.$chapter['Name']."</u>: ".$chapter['Description'] . '</p>';
+		
+		if ($chapters == null)
+		{
+			echo "There are currently no chapters unlocked for you. Please ask your teacher. <br/> At the moment it is not possible to start the quiz.";
+		} else{
+		foreach ( $chapters as $chapter ) {
+			echo '<p><b>' . $chapter ['Id'] . ')</b><u>' . $chapter ['Name'] . "</u>: " . $chapter ['Description'] . '</p>';
 		}
 		echo "<h1>Start the game</h1>";
 		echo '	<form name="form" action="question_show.php" method="get">
@@ -20,6 +25,7 @@ include_once 'navigationBar.php';
 				<input type="hidden" name="i" value="0"><br/>
 				<input class=\'btn btn-success btn-lg\' type="submit" value="Start the Quiz!"><br/>
 			</form>';
+		}
 
 	}else
 	{

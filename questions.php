@@ -89,7 +89,7 @@ function answerQuestion($questionId, $answer, $studentId)
 		die( print_r( sqlsrv_errors(), true));
 	}
 
-	echo "result of answering question: ".$result;
+	//echo "result of answering question: ".$result;
 	/*				0 - Correct Answer
 --					1 - wrong Answer
 --					2 - not allowed to answer

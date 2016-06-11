@@ -18,13 +18,20 @@ include_once 'userManagement.php';
 
 $i = $_GET ['i'] + 1;
 // Check if answer was correct and display right solution if it wasn't
-echo($_GET['questionId']);
-echo( $_GET['studentAnswer']);
-echo(getUserId());
 
  $result = answerQuestion($_GET['questionId'], $_GET['studentAnswer'], getUserId());
-
-//$result = "Not correct.";
+ 
+ if ($result == 0){
+ 	$resultText = "Correct Answer.";
+ } else if($result == 1){
+ 	$resultText = "Wrong Answer.";
+ } else if($result == 2){
+ 	$resultText = "You are not allowed to answer that question. Ask your teacher to unlock this Chapter for you.";
+ } else if($result == 3){
+ 	$resultText = "Question does not exist. Ask your teacher.";
+ } else if($result == 3){
+ 	$resultText = "There is something wrong with your student profile. Ask your teacher.";
+ }
 ?>
 
 	<div class="jumbotron col-md-6 col-md-offset-3">
@@ -34,7 +41,7 @@ echo(getUserId());
 			Answer given: <?php echo $_GET ['studentAnswer'] ?>	
 			</div>
 			<div class="form-group ">
-			Status: <?php echo $result; ?>	
+			Status: <?php echo $resultText; ?>	
 			</div>
 			<input type="hidden" name="nextQuestion" value="nextQuestion"
 				class="form-control"> <input type="hidden" name="i"
@@ -51,6 +58,7 @@ echo(getUserId());
 <?php
 echo 'DEBUG <br/> QuestionId: ' . $_GET ['questionId'] . '<br/>';
 echo 'Answer: ' . $_GET ['studentAnswer'] . '<br/>';
+echo "StudentID: " . getUserId();
 ?>
 </body>
 
