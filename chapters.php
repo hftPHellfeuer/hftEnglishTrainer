@@ -74,5 +74,32 @@ function getChapters($sql){
 	return $chapters;
 }
 
+function addStudentToChapter($studentId, $chapterId){
+
+	$sql = "INSERT INTO Student_Chapter (Student_Id, Chapter_Id) VALUES ('$studentId', '$chapterId');";
+	
+	$conn = OpenConnection ();
+	
+	$stmt = sqlsrv_query ( $conn, $sql );
+	if ($stmt == false) {
+		echo "Error in executing statement.\n";
+		die ( print_r ( sqlsrv_errors (), true ) );
+	}
+	
+	if ($stmt == false) {
+		echo "Could not add student to chapter.\n";
+		$result = 1;
+	} else {
+		$result= 0;
+	}
+	
+	
+	/* Free the statement and connection resources. */
+	sqlsrv_free_stmt ( $stmt );
+	CloseConnection ( $conn );
+	
+	return $result;
+}
+
 
 ?>
