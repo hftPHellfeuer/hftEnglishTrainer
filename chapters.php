@@ -29,10 +29,19 @@ function addChapter($name, $description){
 	
 }
 
+function getAllChaptersAdmin() {
+
+	$sql = "SELECT * from Chapter";
+	return getChapters($sql);
+}
+
 function getAllChapters($studentID) {
-	
+
 	$sql = "SELECT * from Chapter inner join Student_Chapter on Chapter_Id = Id Where Student_Id = '{$studentID}'";
-	
+	return getChapters($sql);
+}
+
+function getChapters($sql){
 	$conn = OpenConnection ();
 	
 	$stmt = sqlsrv_query ( $conn, $sql );
@@ -52,7 +61,7 @@ function getAllChapters($studentID) {
 			array_push ( $chapters, array (
 					'Id' => $row ['Id'],
 					'Name' => $row ['Name'],
-					'Description' => $row ['Description'] 
+					'Description' => $row ['Description']
 			) );
 			$count ++;
 		}
@@ -64,4 +73,6 @@ function getAllChapters($studentID) {
 	
 	return $chapters;
 }
+
+
 ?>

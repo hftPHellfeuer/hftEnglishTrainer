@@ -9,7 +9,12 @@ echo ('<div class="col-md-8 col-md-offset-2">');
 if (isLogedIn ()) {
 	
 	echo "<h1>Chapters</h1>";
-	$chapters = getAllChapters ( getUserId () );
+	if (isTeacher()){
+		$chapters = getAllChaptersAdmin();
+	}else{
+		$chapters = getAllChapters ( getUserId () );
+	}
+	
 	
 	if ($chapters == null) {
 		echo "There are currently no chapters unlocked for you. Please ask your teacher. <br/> At the moment it is not possible to start the quiz.";
