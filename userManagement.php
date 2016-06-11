@@ -147,5 +147,43 @@ function internalLogin($email, $password, $teacher)
     
     	return $students;
     }
+    
+    function getStatistics() {
+    
+    	$sql = "SELECT Student.Name as Student_Id, Question.Text as Question_Id, Student_Question.correctTrys, Student_Question.wrongTrys, Student_Question.wrongAnswers from Student_Question inner join Student on Student_Question.Student_Id = Student.Id inner join Question on Student_Question.Question_Id = Question.Id";
+
+    	$conn = OpenConnection ();
+    
+    	$stmt = sqlsrv_query ( $conn, $sql );
+    	if ($stmt == false) {
+    		echo "Error in executing statement.\n";
+    		die ( print_r ( sqlsrv_errors (), true ) );
+    	}
+    
+    	$stats = array ();
+    
+    	if ($stmt == false) {
+    		echo "Could not load students.\n";
+    		die ( print_r ( sqlsrv_errors (), true ) );
+    	} else {
+    		$count = 0;
+    		while ( $row = sqlsrv_fetch_array ( $stmt, SQLSRV_FETCH_ASSOC ) ) {
+    			array_push ( $stats, array (
+    					'Student_Id' => $row ['Student_Id'],
+    					'Question_Id' => $row ['Question_Id'],
+    					'correctTrys' => $row ['correctTrys'],
+    					'wrongTrys' => $row ['wrongTrys'],
+    					'wrongAnswers' => $row ['wrongAnswers']
+    			) );
+    			$count ++;
+    		}
+    	}
+    
+    	/* Free the statement and connection resources. */
+    	sqlsrv_free_stmt ( $stmt );
+    	CloseConnection ( $conn );
+    
+    	return $stats;
+    }
 
 ?>
