@@ -32,7 +32,7 @@ if (isset ( $errorMessage )) {
 
 	$stats = getStatistics();
 	foreach ( $stats as $stat ) {
-		echo '<tr><td>>' . $stat ['Student_Id'] . '</td><td>' . $stat ['Question_Id'] . "</td><td>" . $stat ['correctTrys'] . "</td><td>" . $stat ['wrongTrys'] . "</td><td>" . $stat ['wrongAnswers'] . '</td></tr>';
+		echo '<tr><td>' . $stat ['Student_Id'] . '</td><td>' . $stat ['Question_Id'] . "</td><td>" . $stat ['correctTrys'] . "</td><td>" . $stat ['wrongTrys'] . "</td><td>" . $stat ['wrongAnswers'] . '</td></tr>';
 	}
 
 ?>
