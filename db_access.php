@@ -1,4 +1,5 @@
 <?php
+if (!function_exists('OpenConnection')){
 function OpenConnection() {
 	$connectionInfo = array (
 			"UID" => "HftAdmin@hft-projects",
@@ -20,9 +21,11 @@ function OpenConnection() {
 	
 	return $conn;
 }
-
+}
+if (!function_exists('CloseConnection')){
 function CloseConnection($conn) {
 	sqlsrv_close ( $conn );
+}
 }
 
 ?>

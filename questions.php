@@ -1,5 +1,5 @@
 <?php
-include 'db_access.php';
+include_once 'db_access.php';
 
 function GetQuestions() {
 	try {

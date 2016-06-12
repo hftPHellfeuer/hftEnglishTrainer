@@ -1,31 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-	<?php
-	include_once 'questions.php';
-	include_once 'userManagement.php';
-
-	$i = $_GET ['i'] + 1;
-	// Check if answer was correct and display right solution if it wasn't
-
-	$questions = getQuestionsForChapter ( 1, 1 );
-	$myQuestion = $questions[$i -1];
-	$result = answerQuestion($_GET['questionId'], $_GET['studentAnswer'], getUserId());
-	if ($result== 0)
-	{
-		$title = 'Good Job!';
-	}elseif($result == 1){
-		$title = 'Sorry that\'s wrong...';
-	}else{
-		$title = 'Error Code: 0'. $result;
-	}
-	//$result = "Not correct.";
-	echo('<title>'.$title.'</title>');
-
-	?>
-
-
+<title>Check your answer</title>
 </head>
 <body>
 
@@ -36,22 +12,48 @@
 	<link href="assets/css/ie10-viewport-bug-workaround.css"
 		rel="stylesheet">
     
+<?php
+include_once 'navigationBar.php';
+		
+		navigationBar();
+		
+include_once 'questions.php';
+include_once 'userManagement.php';
 
+$i = $_POST ['i'] + 1;
+$chapter = $_POST['Chapter'];
+
+// Check if answer was correct and display right solution if it wasn't
+
+ $result = answerQuestion($_POST['questionId'], $_POST['studentAnswer'], getUserId());
+ 
+ if ($result == 0){
+ 	$resultText = "Correct Answer.";
+ } else if($result == 1){
+ 	$resultText = "Wrong Answer. Correct answer is: " .$_POST['Answer'];
+ } else if($result == 2){
+ 	$resultText = "You are not allowed to answer that question. Ask your teacher to unlock this Chapter for you.";
+ } else if($result == 3){
+ 	$resultText = "Question does not exist. Ask your teacher.";
+ } else if($result == 3){
+ 	$resultText = "There is something wrong with your student profile. Ask your teacher.";
+ }
+?>
 
 	<div class="jumbotron col-md-6 col-md-offset-3">
-		<h1><?php   echo($title) ?></h1>
-		<form name="form" action="question_show.php" method="get">
+		<h2>  <?php echo $resultText; ?>	</h2>
+		<form name="form" action="question_show.php" method="post">
 			<div class="form-group ">
-				<?php
-					echo('<p><h2>'.$myQuestion ['Text']. ':  </h2></p>');
-					echo('<p><h2> Correct Answer: ' .$myQuestion ['Answer']. '</h2></p>');
-					echo ('<p><h2> Your Answer: ' .$_GET ['studentAnswer'].'</h2></p>') ?>
-
+				<?php echo $_POST ['Question'].'?' ?>
 			</div>
-			<input type="hidden" name="nextQuestion" value="nextQuestion"
-				class="form-control"> <input type="hidden" name="i"
-				value="<?php echo $i?>">
-			<br>
+			<div class="form-group ">
+			Answer given: <?php echo $_POST ['studentAnswer'] ?>	
+			</div>
+
+			<input type="hidden" name="nextQuestion" value="nextQuestion">
+			<input type="hidden" name="i" value="<?php echo $i?>">
+			<input type="hidden" name="Chapter" value="<?php echo $chapter?>">
+
 			<div class="form-group ">
 				<input type="submit" value="Next question"
 					class="btn btn-success btn-lg">
@@ -61,9 +63,12 @@
 
 	</div>
 <?php
-//echo 'DEBUG <br/> QuestionId: ' . $_GET ['questionId'] . '<br/>';
-//echo 'Answer: ' . $_GET ['studentAnswer'] . '<br/>';
-?>
+/*echo 'DEBUG <br/> QuestionId: ' . $_POST ['questionId'] . '<br/>';
+echo 'studentAnswer: ' . $_POST ['studentAnswer'] . '<br/>';
+echo 'correctAnswer: ' . $_POST ['Answer'] . '<br/>';
+echo "StudentID: " . getUserId();
+echo "Chapter: " .  $_POST ['Chapter'];
+*/?>
 </body>
 
 </html>

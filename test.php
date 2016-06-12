@@ -47,5 +47,4 @@ sqlsrv_close( $conn);
 
 return $result;
 
-
 ?>

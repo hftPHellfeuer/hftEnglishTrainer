@@ -29,10 +29,19 @@ function addChapter($name, $description){
 	
 }
 
+function getAllChaptersAdmin() {
+
+	$sql = "SELECT * from Chapter";
+	return getChapters($sql);
+}
+
 function getAllChapters($studentID) {
-	
+
 	$sql = "SELECT * from Chapter inner join Student_Chapter on Chapter_Id = Id Where Student_Id = '{$studentID}'";
-	
+	return getChapters($sql);
+}
+
+function getChapters($sql){
 	$conn = OpenConnection ();
 	
 	$stmt = sqlsrv_query ( $conn, $sql );
@@ -52,7 +61,7 @@ function getAllChapters($studentID) {
 			array_push ( $chapters, array (
 					'Id' => $row ['Id'],
 					'Name' => $row ['Name'],
-					'Description' => $row ['Description'] 
+					'Description' => $row ['Description']
 			) );
 			$count ++;
 		}
@@ -64,4 +73,33 @@ function getAllChapters($studentID) {
 	
 	return $chapters;
 }
+
+function addStudentToChapter($studentId, $chapterId){
+
+	$sql = "INSERT INTO Student_Chapter (Student_Id, Chapter_Id) VALUES ('$studentId', '$chapterId');";
+	
+	$conn = OpenConnection ();
+	
+	$stmt = sqlsrv_query ( $conn, $sql );
+	if ($stmt == false) {
+		echo "Error in executing statement.\n";
+		die ( print_r ( sqlsrv_errors (), true ) );
+	}
+	
+	if ($stmt == false) {
+		echo "Could not add student to chapter.\n";
+		$result = 1;
+	} else {
+		$result= 0;
+	}
+	
+	
+	/* Free the statement and connection resources. */
+	sqlsrv_free_stmt ( $stmt );
+	CloseConnection ( $conn );
+	
+	return $result;
+}
+
+
 ?>
