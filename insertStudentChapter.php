@@ -1,6 +1,6 @@
 <?php
 include 'chapters.php';
-session_start ();
+include_once 'userManagement.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -51,30 +51,43 @@ if (isset ( $errorMessage )) {
 			<div class="form-group ">Student:</div>
 			<div class="form-group ">
 				<?php
-				$students = getAllStudents ();
-				
-				echo '<select name="studentId" class="form-control">';
-				foreach ( $students as $student ) {
-					echo '<option value="' . $student ['Id'] . '">' . $student ['Name'] . " (".  $student ['EMail'] .") </option>";
+				if (isTeacher ())
+				{
+					$students = getAllStudents ();
+
+					echo '<select name="studentId" class="form-control">';
+					foreach ( $students as $student ) {
+						echo '<option value="' . $student ['Id'] . '">' . $student ['Name'] . " (".  $student ['EMail'] .") </option>";
+					}
+					echo "</select>";
 				}
-				echo "</select>";
 				?>	
 			</div>
 			<div class="form-group ">Chapter:</div>
 			<div class="form-group">
 				<?php
-				$chapters = getAllChaptersAdmin ();
-				
-				echo '<select name="chapterId" class="form-control">';
-				foreach ( $chapters as $chapter ) {
-					echo '<option value="' . $chapter ['Id'] . '">' . $chapter ['Name'] . " (".  $chapter ['Description'] .") </option>";
+				if (isTeacher ()) {
+					$chapters = getAllChaptersAdmin ();
+					echo '<select name="chapterId" class="form-control">';
+					foreach ( $chapters as $chapter ) {
+						echo '<option value="' . $chapter ['Id'] . '">' . $chapter ['Name'] . " (".  $chapter ['Description'] .") </option>";
+					}
+					echo "</select>";
 				}
-				echo "</select>";
 				?>	
 			</div>
 			<br>
-			<button type="submit" class="btn btn-success btn-lg">Add</button>
-		</form>
+			<?php
+			if (isTeacher ())
+			{
+				echo '<button type="submit" class="btn btn-success btn-lg">Add</button>';
+			}else
+			{
+				echo "You are no teacher. You can not add students to a chapter.";
+			}
+
+			?>
+			</form>
 	</div>
 </body>
 </html>

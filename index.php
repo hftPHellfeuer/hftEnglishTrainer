@@ -2,6 +2,7 @@
 <?php
 include_once 'chapters.php';
 include_once 'navigationBar.php';
+include_once 'userManagement.php';
 
 navigationBar ();
 
